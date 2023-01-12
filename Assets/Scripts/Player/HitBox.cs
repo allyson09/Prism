@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackEffect : MonoBehaviour
+public class HitBox : MonoBehaviour
 {
     // Martial Variables
     private Renderer hitBox;
     private Color hitBoxColor = Color.magenta;
 
     // Game Object Variables
-    private PlayerController parentComponent;
+    private PlayerController playerComponent;
+    private AreaEffector2D areaEffector;
     private Rigidbody2D enemyRB;
     private float directAttackSpeed = 40;
 
@@ -19,20 +20,30 @@ public class AttackEffect : MonoBehaviour
     // Interacting with other game object variables
     // private Dictionary<int, Dictionary> attackRangeObjects;
     // private Dictionary<string, object> objInRange;
-    // private MetalObject collisionMetalObject;
+    private MetalObject collisionComponent;
 
     // Start is called before the first frame update
     void Start()
     {
         hitBox = GetComponent<Renderer>();
-        parentComponent = transform.GetComponentInParent<PlayerController>();
+        playerComponent = transform.GetComponentInParent<PlayerController>();
+        areaEffector = GetComponent<AreaEffector2D>();
         // attackRangeObjects = new Dictionary<int, Dictionary>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        attackDirection = parentComponent.isFacingLeft;
+        attackDirection = playerComponent.isFacingLeft;
+
+        // Update direction of direct force attacks
+        if (attackDirection < 0)
+        {
+            areaEffector.forceAngle = 180;
+        } else
+        {
+            areaEffector.forceAngle = 0;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -40,36 +51,31 @@ public class AttackEffect : MonoBehaviour
         // Eventually this method will call various attack functions based on conditions
 
         // Visual feedback
-        hitBoxColor.a = 1;
-        hitBox.material.color = hitBoxColor;
+        // hitBoxColor.a = 1;
+        // hitBox.material.color = hitBoxColor;
+        // Debug.Log("Object entered collision");
 
         // Get entering object's component
-        // MetalObject collisionMetalObject = collision.gameObject.GetComponent<MetalObject>();
-
-        // Debug.Log("Metal object #" + collisionMetalObject.objectId);
+        // Later write conditionals so the component I'm grabbing is defined by a variable
+        // Example collision.gameObject.GetComponent<objectTypeVariable>();
+        // if (collision.tag == "MetalObject")
+        // {
+            // MetalObject collisionComponent = collision.gameObject.GetComponent<MetalObject>();
+            // Debug.Log("Metal object speed: " + collisionComponent.speed);
+        // }
 
         // Add new collision object to dictionary of current objects in range
-        // Eventually save this info in session or a DB
-        // objInRange = new Dictionary<string, object>();
-        // objInRange.Add("ObjId", currentObjInRange.objId);
-        // objInRange.Add("ObjType", currentObjInRange.objType);
-                    
-        // Debug.Log(objInRange["Index"]);
-        // Debug.Log(objInRange["ObjId"]);
-        // Debug.Log(objInRange["ObjType"]);
 
-        // attackRangeObjects.Add(attackRangeObjects.Count + 1, objInRange);
-
-        if (collision.gameObject.tag == "MetalObject")
-        {
-            // This functionality happens while F is being held down when enemies come into range
-            if (Input.GetKey(KeyCode.F))
-            {
-                // Update enemy's movement velocity
-                enemyRB = collision.gameObject.GetComponent<Rigidbody2D>();
-                enemyRB.velocity = new Vector2(attackDirection * directAttackSpeed, enemyRB.velocity.y);
-            }
-        }
+        // if (collision.gameObject.tag == "MetalObject")
+        // {
+        //     // This functionality happens while F is being held down when enemies come into range
+        //     if (Input.GetKey(KeyCode.F))
+        //     {
+        //         // Update enemy's movement velocity
+        //         enemyRB = collision.gameObject.GetComponent<Rigidbody2D>();
+        //         enemyRB.velocity = new Vector2(attackDirection * directAttackSpeed, enemyRB.velocity.y);
+        //     }
+        // }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

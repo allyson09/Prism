@@ -123,6 +123,28 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &133631342 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1638922039506017678, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
+  m_PrefabInstance: {fileID: 1750447867}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &133631348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133631342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46fe4279cd7b242888e9935a17568c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 2110020322}
+  speed: 400
+  nextWaypointDistance: 3
+  objectId: 2
+  magnetic: 1
 --- !u!1001 &160126773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188,14 +210,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1638922039506017678, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: MagneticBall
       objectReference: {fileID: 0}
     - target: {fileID: 1638922039506017687, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 2110020322}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1638922039506017687, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
+--- !u!1 &303488534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1638922039506017678, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
+  m_PrefabInstance: {fileID: 1638922038430020709}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &303488540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303488534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46fe4279cd7b242888e9935a17568c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 2110020322}
+  speed: 400
+  nextWaypointDistance: 3
+  objectId: 1
+  magnetic: 1
 --- !u!1 &331813044
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +353,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &415792972 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1638922039506017678, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
+  m_PrefabInstance: {fileID: 1980655757}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &415792978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415792972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46fe4279cd7b242888e9935a17568c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 2110020322}
+  speed: 400
+  nextWaypointDistance: 3
+  objectId: 0
+  magnetic: 0
 --- !u!1 &433768438
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,6 +618,28 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &575070836 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1638922039506017678, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
+  m_PrefabInstance: {fileID: 1582991617}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &575070842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575070836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46fe4279cd7b242888e9935a17568c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 2110020322}
+  speed: 400
+  nextWaypointDistance: 3
+  objectId: 4
+  magnetic: 1
 --- !u!1 &816617804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1464,13 +1553,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1638922039506017678, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: MagneticBall
       objectReference: {fileID: 0}
     - target: {fileID: 1638922039506017687, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 2110020322}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1638922039506017687, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
 --- !u!1 &1613921574
 GameObject:
@@ -1642,6 +1732,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!1 &1667779741 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1638922039506017678, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
+  m_PrefabInstance: {fileID: 160126773}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1667779747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667779741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46fe4279cd7b242888e9935a17568c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 2110020322}
+  speed: 400
+  nextWaypointDistance: 3
+  objectId: 3
+  magnetic: 1
 --- !u!1001 &1750447867
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1707,13 +1819,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1638922039506017678, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: MagneticBall
       objectReference: {fileID: 0}
     - target: {fileID: 1638922039506017687, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 2110020322}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1638922039506017687, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
 --- !u!1 &1753757740
 GameObject:
@@ -1976,6 +2089,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1638922039062774882, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1638922039506017673, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -2034,13 +2151,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1638922039506017678, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: MagneticBall
       objectReference: {fileID: 0}
     - target: {fileID: 1638922039506017687, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 2110020322}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1638922039506017687, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
 --- !u!1 &2023965650
 GameObject:
@@ -2251,13 +2369,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1638922039506017678, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: MagneticBall
       objectReference: {fileID: 0}
     - target: {fileID: 1638922039506017687, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 2110020322}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1638922039506017687, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 34821722b7e6b4bdbbb8b7f58e3905f5, type: 3}
 --- !u!4 &1670789329961254288 stripped
 Transform:
