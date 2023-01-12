@@ -21,26 +21,8 @@ public class MetalObject : MonoBehaviour
     public int objectId;
     // public string objectName;
     public bool magnetic;
-    public static int Count;
-    private static Dictionary<int, MetalObject> MetalObjectList;
+    // public static int Count;
 
-    // Constructor
-    // public MetalObject()
-    // {
-    //     // objectName = Transform.tag;
-    //     magnetic = true;
-    //     Count++;
-    //     objectId = Count;
-
-
-    //     Debug.Log("New metal object #" + objectId);
-    //     // Debug.Log(objectName);
-    //     Debug.Log(magnetic);
-    //     Debug.Log(Count);
-    //     Debug.Log(objectId);
-    // }
-
-    // Can run methods that make the object attract to and repel from Prism
 
     // Start is called before the first frame update
     void Start()
@@ -49,10 +31,6 @@ public class MetalObject : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         InvokeRepeating("UpdatePath", 0f, .5f);
-
-        // Instanciate all metal objects in the scene
-        // MetalObject thisMetalObject = new MetalObject();
-        // MetalObjectList.Add(thisMetalObject.objectId, thisMetalObject);
     }
 
     // Update is called once per frame
