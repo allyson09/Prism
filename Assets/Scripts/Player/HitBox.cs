@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class HitBox : MonoBehaviour
 {
-    // Martial Variables
+    // Martial
     private Renderer hitBox;
     private Color hitBoxColor = Color.magenta;
 
-    // Game Object Variables
+    // Game Object
     private PlayerController playerComponent;
-    private AreaEffector2D areaEffector;
+    private AreaEffector2D directForceAE;
+    private PointEffector2D radialForcePE;
     private Rigidbody2D enemyRB;
     private float directAttackSpeed = 40;
 
-    // Navigation Variables
+    // Navigation
     private float attackDirection = -1;
+
+    // Attack status
+    private bool directForceActive = false;
+    private bool radialForceActive = false;
 
     // Interacting with other game object variables
     // private Dictionary<int, Dictionary> attackRangeObjects;
@@ -27,7 +32,9 @@ public class HitBox : MonoBehaviour
     {
         hitBox = GetComponent<Renderer>();
         playerComponent = transform.GetComponentInParent<PlayerController>();
-        areaEffector = GetComponent<AreaEffector2D>();
+        directForceAE = GetComponent<AreaEffector2D>();
+        radialForcePE = GetComponent<PointEffector2D>();
+        // hitBoxColor.a = 0;
         // attackRangeObjects = new Dictionary<int, Dictionary>();
     }
 
@@ -37,13 +44,43 @@ public class HitBox : MonoBehaviour
         attackDirection = playerComponent.isFacingLeft;
 
         // Update direction of direct force attacks
-        if (attackDirection < 0)
+        if (Input.GetKeyDown(KeyCode.A) && this.name == "Direct Force" && !radialForceActive)
         {
-            areaEffector.forceAngle = 180;
-        } else
-        {
-            areaEffector.forceAngle = 0;
+            if (attackDirection < 0)
+            {
+                directForceAE.forceAngle = 180;
+            } else
+            {
+                directForceAE.forceAngle = 0;
+            }
+            directForceAE.forceMagnitude = 200;
+            directForceActive = true;
+            hitBox.material.SetColor("_Color", Color.green);
         }
+
+        if (Input.GetKeyDown(KeyCode.W) && this.name == "Radial Force" && !directForceActive)
+        {
+            radialForcePE.forceMagnitude = 200;
+            radialForceActive = true;
+            hitBox.material.SetColor("_Color", Color.green);
+        }
+
+        // Put key up conditions to turn force magnitude back to 0
+        if (Input.GetKeyUp(KeyCode.A) && this.name == "Direct Force")
+        {
+            directForceAE.forceMagnitude = 0;
+            directForceActive = false;
+            hitBox.material.SetColor("_Color", Color.white);
+        }
+
+        if (Input.GetKeyUp(KeyCode.W) && this.name == "Radial Force")
+        {
+            radialForcePE.forceMagnitude = 0;
+            radialForceActive = false;
+            hitBox.material.SetColor("_Color", Color.white);
+        }
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -81,11 +118,11 @@ public class HitBox : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         //Remove collision object from dictionary of current objects in range
-        if (collision.gameObject.tag == "Enemy")
-        {
-            hitBoxColor.a = 0;
-            hitBox.material.color = hitBoxColor;
-        }
+        // if (collision.gameObject.tag == "Enemy")
+        // {
+        //     hitBoxColor.a = 0;
+        //     hitBox.material.color = hitBoxColor;
+        // }
     }
 }
 
@@ -96,26 +133,6 @@ public class HitBox : MonoBehaviour
 // Potential code structure
 
 // *** TRIGGERED MAGNETIC ATTACKS ***
-
-// Directional magnetic push
-// Target = All magnetically interactable objects in range
-// Action = Push target objects in direction player is facing
-// Functionality = Apply the same direction and amount of force (depending on mass) to all objects in range
-
-// Directional magnetic pull
-// Target = All magnetically interactable objects in range
-// Action = Pull target objects towards player
-// Functionality = Apply the same direction and amount of force (depending on mass) to all objects in range
-
-// Radial magnetic push
-// Target = All magnetically interactable objects in range
-// Action = Push target objects in direction opposite of the direct path towards the player
-// Functionality = Apply the opposite direction as the path towards the player as the target destination and the same amount of force (depending on mass) to all objects in range
-
-// Radial magnetic pull
-// Target = All magnetically interactable objects in range
-// Action = Pull target objects towards the player
-// Functionality = Apply the player as the target destination and the same amount of force (depending on mass) to all objects in range
 
 // Targeted magnetic push
 // Target = Selected object

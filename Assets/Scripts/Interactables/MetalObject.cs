@@ -5,7 +5,7 @@ using Pathfinding;
 
 public class MetalObject : MonoBehaviour
 {
-    // Movement variables
+    // Movement
     public Transform target;
     public float speed = 200f;
     public float nextWaypointDistance = 3f;
@@ -17,7 +17,7 @@ public class MetalObject : MonoBehaviour
     private Seeker seeker;
     private Rigidbody2D rb;
 
-    // Reference variables
+    // Reference
     public int objectId;
     // public string objectName;
     public bool magnetic;

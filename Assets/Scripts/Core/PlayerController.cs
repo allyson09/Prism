@@ -10,34 +10,36 @@ public class PlayerController : MonoBehaviour
     // Parent object
     public GameObject playerObject;
 
-    // Directional variables
+    // Directional
     public float isFacingLeft = -1;
 
-    // Navigation variables
+    // Navigation
     public float speed;
     private float moveInput;
 
-    // Prism's state variables
+    // Prism's state
     private bool isMoving = false;
+    private bool isMovingLeft = false;
+    private bool isMovingRight = false;
     private bool isGrounded;
 
-    // Jupming variables
+    // Jupming
     public float jumpForce;
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
 
-    // Animation variables
+    // Animation
     private Animator anim;
 
-    // Magnetic attack variables
+    // Magnetic attack
     public GameObject directForce;
     public GameObject radialForce;
     private PointEffector2D radialForcePointEffector;
     private bool isDirectForcePushing = false;
 
-    // Input variables
-    private bool isKeyPressed = false;
+    // Input
+    // private bool isKeyPressed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +59,7 @@ public class PlayerController : MonoBehaviour
     void StateCheck()
     {
         // Check if Prism is moving left or right
-        isMoving = IsMoving();
+        IsMoving();
 
         // Check if Prism is airborne
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
@@ -78,15 +80,24 @@ public class PlayerController : MonoBehaviour
         Attack();
     }
 
-    bool IsMoving()
+    void IsMoving()
     {
-        moveInput = Input.GetAxis("Horizontal");
-        if (moveInput != 0)
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            return true;
-        } else 
+            moveInput = -1;
+            isMovingLeft = true;
+            isMovingRight = false;
+            isMoving = true;
+        } else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            return false;
+            moveInput = 1;
+            isMovingRight = true;
+            isMovingLeft = false;
+            isMoving = true;
+        } else if ((Input.GetKeyUp(KeyCode.LeftArrow) && isMovingLeft) || (Input.GetKeyUp(KeyCode.RightArrow) && isMovingRight))
+        {
+            isMoving = false;
+            moveInput = 0;
         }
     }
 
@@ -117,13 +128,13 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isKeyPressed)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            isKeyPressed = true;
+            // isKeyPressed = true;
             anim.SetBool("isJumping", true);
             rb.velocity = Vector2.up * jumpForce;
         }
-        isKeyPressed = false;
+        // isKeyPressed = false;
     }
     
     void Attack()
