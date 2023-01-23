@@ -21,6 +21,7 @@ public class HitBox : MonoBehaviour
     // Attack status
     private bool directForceActive = false;
     private bool radialForceActive = false;
+    private int pullForceActive = 1;
 
     // Interacting with other game object variables
     // private Dictionary<int, Dictionary> attackRangeObjects;
@@ -41,10 +42,24 @@ public class HitBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        TriggerAttacks();
+    }
+
+    void TriggerAttacks()
+    {
         attackDirection = playerComponent.isFacingLeft;
 
-        // Update direction of direct force attacks
-        if (Input.GetKeyDown(KeyCode.A) && this.name == "Direct Force" && !radialForceActive)
+        // Check whether player is pulling or pushing objects
+        if (Input.GetKey(KeyCode.Q))
+        {
+            pullForceActive = -1;
+        } else
+        {
+            pullForceActive = 1;
+        }
+
+        // Trigger attacks
+        if (Input.GetKeyDown(KeyCode.E) && this.name == "Direct Force" && !radialForceActive)
         {
             if (attackDirection < 0)
             {
@@ -53,12 +68,12 @@ public class HitBox : MonoBehaviour
             {
                 directForceAE.forceAngle = 0;
             }
-            directForceAE.forceMagnitude = 200;
+            directForceAE.forceMagnitude = 200 * pullForceActive;
             directForceActive = true;
             hitBox.material.SetColor("_Color", Color.green);
         }
 
-        if (Input.GetKeyDown(KeyCode.W) && this.name == "Radial Force" && !directForceActive)
+        if (Input.GetKeyDown(KeyCode.R) && this.name == "Radial Force" && !directForceActive)
         {
             radialForcePE.forceMagnitude = 200;
             radialForceActive = true;
@@ -66,71 +81,32 @@ public class HitBox : MonoBehaviour
         }
 
         // Put key up conditions to turn force magnitude back to 0
-        if (Input.GetKeyUp(KeyCode.A) && this.name == "Direct Force")
+        if (Input.GetKeyUp(KeyCode.E) && this.name == "Direct Force")
         {
             directForceAE.forceMagnitude = 0;
             directForceActive = false;
             hitBox.material.SetColor("_Color", Color.white);
         }
 
-        if (Input.GetKeyUp(KeyCode.W) && this.name == "Radial Force")
+        if (Input.GetKeyUp(KeyCode.R) && this.name == "Radial Force")
         {
             radialForcePE.forceMagnitude = 0;
             radialForceActive = false;
             hitBox.material.SetColor("_Color", Color.white);
         }
-
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Eventually this method will call various attack functions based on conditions
-
-        // Visual feedback
-        // hitBoxColor.a = 1;
-        // hitBox.material.color = hitBoxColor;
-        // Debug.Log("Object entered collision");
-
-        // Get entering object's component
-        // Later write conditionals so the component I'm grabbing is defined by a variable
-        // Example collision.gameObject.GetComponent<objectTypeVariable>();
-        // if (collision.tag == "MetalObject")
-        // {
-            // MetalObject collisionComponent = collision.gameObject.GetComponent<MetalObject>();
-            // Debug.Log("Metal object speed: " + collisionComponent.speed);
-        // }
-
-        // Add new collision object to dictionary of current objects in range
-
-        // if (collision.gameObject.tag == "MetalObject")
-        // {
-        //     // This functionality happens while F is being held down when enemies come into range
-        //     if (Input.GetKey(KeyCode.F))
-        //     {
-        //         // Update enemy's movement velocity
-        //         enemyRB = collision.gameObject.GetComponent<Rigidbody2D>();
-        //         enemyRB.velocity = new Vector2(attackDirection * directAttackSpeed, enemyRB.velocity.y);
-        //     }
-        // }
+        // Called when objects enter the hitbox
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        //Remove collision object from dictionary of current objects in range
-        // if (collision.gameObject.tag == "Enemy")
-        // {
-        //     hitBoxColor.a = 0;
-        //     hitBox.material.color = hitBoxColor;
-        // }
+        // Called when objects leave the hitbox
     }
 }
 
-// *** Potential objects *** [ WIP ]
-// Wait to make classes after finalizing core mechanics
-
-
-// Potential code structure
 
 // *** TRIGGERED MAGNETIC ATTACKS ***
 
