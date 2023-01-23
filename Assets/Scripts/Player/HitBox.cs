@@ -75,7 +75,7 @@ public class HitBox : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R) && this.name == "Radial Force" && !directForceActive)
         {
-            radialForcePE.forceMagnitude = 200;
+            radialForcePE.forceMagnitude = 200 * pullForceActive;
             radialForceActive = true;
             hitBox.material.SetColor("_Color", Color.green);
         }
