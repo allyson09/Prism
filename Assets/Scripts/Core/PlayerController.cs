@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     public GameObject directForce;
     public GameObject radialForce;
     private PointEffector2D radialForcePointEffector;
-    private bool isDirectForcePushing = false;
+    // private bool isDirectForcePushing = false;
 
     // Input
     // private bool isKeyPressed = false;
